@@ -37,6 +37,12 @@ export default (entityData = [], filter = {}) => {
                     items = items.filter((d) => d[realKey] > filter[key]);
                     return;
                 }
+                if (key.endsWith('_ar')) {
+                    // less than or equal
+                    const realKey = key.replace(/(_ar)$/, '');
+                    items = items.filter((d) => filter[key].includes(d[realKey]));
+                    return;
+                }
 
                 if (Array.isArray(filter[key])) {
                     items = items.filter((item) => {

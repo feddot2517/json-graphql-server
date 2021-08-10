@@ -31,6 +31,10 @@ const getRangeFiltersFromEntities = (entities) => {
             fields[`${fieldName}_gte`] = { type: fieldType };
         }
 
+        if (fieldType === GraphQLString) {
+            fields[`${fieldName}_ar`] = { type: new GraphQLList(fieldType) };
+        }
+
         if (fieldType != GraphQLBoolean && fieldType != GraphQLList) {
             fields[`${fieldName}_neq`] = { type: fieldType };
         }
